@@ -6,21 +6,15 @@ from extras import *
 
 # lee el archivo y carga en la lista lista_producto todas las palabras
 def lectura():
-    return [["Arroz", 1001, 1037],
-            ["Yerba mate", 4546, 4904],
-            ["Televisor Smart", 2055, 2439],
-            ["Aceite de cocina", 3674, 4783],
-            ["Mouse", 1635, 3603],
-            ["Monitor de computadora", 2782, 2870],
-            ["Silla de oficina", 3174, 4391],
-            ["Lavadora", 3720, 4197],
-            ["Refrigerador", 3352, 4533],
-            ["Smartphone", 2070, 2224],
-            ["Laptop", 4650, 4854],
-            ["Cafetera", 2358, 3646],
-            ["Batidora", 183, 4401],
-            ["Microondas", 4254, 4624]]
-
+    archivo = open("productos.txt", "r") # abre el archivo productos.txt, es un texto plano sin formato
+    productosSinFormato = archivo.readlines() # lee el archivo
+    listaDeProductos = []
+    for productoCadena in productosSinFormato: # recorre el texto plano por cadena
+        cadenaProducto = productoCadena.split(',') # separa la cadena por cada coma: 'Laptop,4650,4854\n'
+        productoFormateado = [cadenaProducto[0], int(cadenaProducto[1]), int(cadenaProducto[2])] # armo una lista con los 3 elementos de la cadena original: 'nombre del producto', precioEconomico, precioPremium
+        listaDeProductos.append(productoFormateado) # agrego la lista a otra lista con todos los prodcutos
+    archivo.close() # cierro el archivo
+    return listaDeProductos #retorno la lista de listas de productos
 
 #De la lista de productos elige uno al azar y devuelve una lista de 3 elementos, el primero el nombre del producto , el segundo si es economico
 #o premium y el tercero el precio.
@@ -30,6 +24,7 @@ def buscar_producto(lista_productos):
 
 #Elige el producto. Debe tener al menos dos productos con un valor similar
 def dameProducto(lista_productos, margen):
+    # random
     producto = ["Silla de oficina", "(premium)", 4391]
     return producto
 
@@ -48,6 +43,29 @@ def procesar(producto_principal, producto_candidato, margen):
 #De manera aleatoria se debera tomar el valor economico o el valor premium. Agregar al nombre '(economico)' o '(premium)'
 #para que sea mostrado en pantalla.
 def dameProductosAleatorios(producto, lista_productos, margen):
+    # producto = 3 -> smart
+    # lista_productos = 3 -> [ 3, 4, 5 ] precios similares según el margen... 
+    # smart precio economico 2500 -> margen 1000 => productos con precio economico entre 1500 - 3500 -> productos_seleccionados =[ ... ]
+    # for -> p/encontrar el producto
+    # random seleccionar premium o economico
+    # seleccionas el precio -> buscas precios similares considerando el margen
+    # returna lista productos con precios similares
+    
+    # random = (1, 2)
+    # if 1: retorna economico
+    # if 2: retorna premium
+    
+    # for element in lista:
+    # [ "nombre", precio econom, precio premium ] => precioElegido = element[ posicion ] 
+    # if precioElegido > (precioElegido - margen) AND precioElegido < (precioElegido + margen)
+    # 2500
+    # 1000
+    # 1500 - 3500
+    # 2500 -1000 = 1500
+    # 2500 +1000 = 3500
+        # true -> productos_seleccionados.append(element)
+    
+    
     productos_seleccionados =   [["Monitor de computadora", "(premium)", 2870],
             ["Silla de oficina", "(economico)", 3174],
             ["Lavadora", "(premium)", 4197],
