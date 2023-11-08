@@ -16,8 +16,8 @@ def lectura():
     archivo.close() # cierro el archivo
     return listaDeProductos #retorno la lista de listas de productos
 
-#De la lista de productos elige uno al azar y devuelve una lista de 3 elementos, el primero el nombre del producto , el segundo si es economico
-#o premium y el tercero el precio.
+# De la lista de productos elige uno al azar y devuelve una lista de 3 elementos:
+# el primero el nombre del producto , el segundo si es economico o premium y el tercero el precio.
 def buscar_producto(lista_productos):
     producto = ["Silla de oficina", "(premium)", 4391]
     return producto

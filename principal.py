@@ -16,6 +16,11 @@ def main():
     # Centrar la ventana y despues inicializar pygame
     os.environ["SDL_VIDEO_CENTERED"] = "1"
     pygame.init()
+    
+    pygame.mixer.music.load("Ghostbusters.mp3")
+    pygame.mixer.music.set_volume(0.1)
+    pygame.mixer.music.play()
+    
     # pygame.mixer.init()
 
     # Preparar la ventana
