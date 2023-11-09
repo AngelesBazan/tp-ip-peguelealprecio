@@ -30,8 +30,25 @@ def buscar_producto(lista_productos):
         return producto
         #producto = ["Silla de oficina", "(premium)", 4391]
 
-#Elige el producto. Debe tener al menos dos productos con un valor similar
+# Elige el producto. Debe tener al menos dos productos con un valor similar
 def dameProducto(lista_productos, margen):
+    productoPpal = buscar_producto(lista_productos)
+    # armar lista nueva con los productos que estén dentro del margen establecido
+    listaProductosLimitada = []
+    # for element in lista_productos:
+    # limitar el precio según el productoPpal
+    
+    
+    # otro random con precio similar al productoPpal
+    # limitar el precio segun el margen que viene por parámetro para elegir el producto similar
+    # hacer lo mismo para 2 productos, en total son 3 productos que se comparan
+    productoComparar = buscar_producto(listaProductosLimitada) # falta setearle un rango de precio
+    # tenenemos que hacer una función que limite la lista de productos al margen pedido (1000)
+    # por ej si el producto random ppal tiene precio 2500, el margen estaría entre 1500 y 3500
+    # entonces, hay que buscar otro producto random entre 1500 y 3500
+    productoComparar2 = buscar_producto(listaProductosLimitada)
+    
+    
     # random
     producto = ["Silla de oficina", "(premium)", 4391]
     return producto
@@ -39,6 +56,7 @@ def dameProducto(lista_productos, margen):
 
 #Devuelve True si existe el precio recibido como parametro aparece al menos 3 veces. Debe considerar el Margen.
 def esUnPrecioValido(precio, lista_productos, margen):
+    #
     return True
 
 # Busca el precio del producto_principal y el precio del producto_candidato, si son iguales o dentro

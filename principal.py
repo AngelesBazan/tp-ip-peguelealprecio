@@ -18,7 +18,7 @@ def main():
     pygame.init()
     
     pygame.mixer.music.load("Ghostbusters.mp3")
-    pygame.mixer.music.set_volume(0.1)
+    pygame.mixer.music.set_volume(0.01)
     pygame.mixer.music.play()
     
     # pygame.mixer.init()
@@ -67,6 +67,9 @@ def main():
             if e.type == QUIT:
                 pygame.quit()
                 return ()
+            
+            """ if e.type == MOUSEBUTTONDOWN:
+                pygame. """
 
             # Ver si fue apretada alguna tecla
             if e.type == KEYDOWN:
