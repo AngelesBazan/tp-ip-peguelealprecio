@@ -19,8 +19,16 @@ def lectura():
 # De la lista de productos elige uno al azar y devuelve una lista de 3 elementos:
 # el primero el nombre del producto , el segundo si es economico o premium y el tercero el precio.
 def buscar_producto(lista_productos):
-    producto = ["Silla de oficina", "(premium)", 4391]
-    return producto
+    indiceDeProductoAleatorio = random.randrange(0, len(lista_productos)+1) # Tira un numero random entre 0 y el largo de la lista de productos, representaría el índice del producto
+    producto = lista_productos[indiceDeProductoAleatorio] # Guardo el producto en variable. [ 'Silla de oficina', 1111, 2222 ]
+    calidadAleatoria = random.randrange(0,2) # Tira un numero random entre 0 y 1, representando 0 para calidad economico, 1 para calidad premium
+    if calidadAleatoria == 0: # Si la calidad es economico, guardo en la variable producto una nueva lista con el nombre del producto, la leyenda correspondiente a la calidad "economico", y el precio correspondiente a esa calidad
+        producto = [producto[0], "(economico)", producto[1]]
+        return producto
+    else: # De lo contrario, la lista será conformada por la leyenda "premium" y el precio correspondiente
+        producto = [producto[0], "(premium)", producto[2]]
+        return producto
+        #producto = ["Silla de oficina", "(premium)", 4391]
 
 #Elige el producto. Debe tener al menos dos productos con un valor similar
 def dameProducto(lista_productos, margen):
