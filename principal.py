@@ -18,7 +18,7 @@ def main():
     pygame.init()
     
     pygame.mixer.music.load("Ghostbusters.mp3")
-    pygame.mixer.music.set_volume(0.01)
+    pygame.mixer.music.set_volume(0.00)
     pygame.mixer.music.play()
     
     # pygame.mixer.init()
@@ -46,7 +46,7 @@ def main():
     # De manera aleatoria se debera tomar el valor economico o el valor premium.
     # Agregar  '(economico)' o '(premium)' y el precio
     productos_en_pantalla = dameProductosAleatorios(producto, lista_productos, MARGEN)
-    print(productos_en_pantalla)
+    #print(productos_en_pantalla)
 
     # dibuja la pantalla la primera vez
     dibujar(screen, productos_en_pantalla, producto,

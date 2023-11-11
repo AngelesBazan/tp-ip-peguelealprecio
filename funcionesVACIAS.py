@@ -19,7 +19,7 @@ def lectura():
 # De la lista de productos elige uno al azar y devuelve una lista de 3 elementos:
 # el primero el nombre del producto , el segundo si es economico o premium y el tercero el precio.
 def buscar_producto(lista_productos):
-    indiceDeProductoAleatorio = random.randrange(0, len(lista_productos)+1) # Tira un numero random entre 0 y el largo de la lista de productos, representaría el índice del producto
+    indiceDeProductoAleatorio = random.randrange(0, len(lista_productos)-1) # Tira un numero random entre 0 y el largo de la lista de productos, representaría el índice del producto
     producto = lista_productos[indiceDeProductoAleatorio] # Guardo el producto en variable. [ 'Silla de oficina', 1111, 2222 ]
     calidadAleatoria = random.randrange(0,2) # Tira un numero random entre 0 y 1, representando 0 para calidad economico, 1 para calidad premium
     if calidadAleatoria == 0: # Si la calidad es economico, guardo en la variable producto una nueva lista con el nombre del producto, la leyenda correspondiente a la calidad "economico", y el precio correspondiente a esa calidad
@@ -29,75 +29,63 @@ def buscar_producto(lista_productos):
         producto = [producto[0], "(premium)", producto[2]]
         return producto
         #producto = ["Silla de oficina", "(premium)", 4391]
+        
+
+#Devuelve True si existe el precio recibido como parametro y aparece al menos 3 veces. Debe considerar el Margen.
+def esUnPrecioValido(precio, lista_productos, margen): # precio = 2500, margen 1000 -> precio - margen: 1500
+    contador = 0
+    for producto in lista_productos:   
+        precioComparar = producto[2]
+        # verifica que producto candidato esté dentro del margen del producto principal
+        if (abs(precioComparar - precio) <= margen): # toma el valor absoluto de la diferencia entre los precios
+            contador = contador + 1
+    if contador >= 3:
+        return True
+    else:
+        return False
+
 
 # Elige el producto. Debe tener al menos dos productos con un valor similar
 def dameProducto(lista_productos, margen):
-    productoPpal = buscar_producto(lista_productos)
-    # armar lista nueva con los productos que estén dentro del margen establecido
-    listaProductosLimitada = []
-    # for element in lista_productos:
-    # limitar el precio según el productoPpal
-    
-    
-    # otro random con precio similar al productoPpal
-    # limitar el precio segun el margen que viene por parámetro para elegir el producto similar
-    # hacer lo mismo para 2 productos, en total son 3 productos que se comparan
-    productoComparar = buscar_producto(listaProductosLimitada) # falta setearle un rango de precio
-    # tenenemos que hacer una función que limite la lista de productos al margen pedido (1000)
-    # por ej si el producto random ppal tiene precio 2500, el margen estaría entre 1500 y 3500
-    # entonces, hay que buscar otro producto random entre 1500 y 3500
-    productoComparar2 = buscar_producto(listaProductosLimitada)
-    
-    
-    # random
-    producto = ["Silla de oficina", "(premium)", 4391]
-    return producto
-
-
-#Devuelve True si existe el precio recibido como parametro aparece al menos 3 veces. Debe considerar el Margen.
-def esUnPrecioValido(precio, lista_productos, margen):
-    #
-    return True
+    productoPpal = buscar_producto(lista_productos) #producto = ["Silla de oficina", "(premium)", 4391]
+    productoValido = esUnPrecioValido(productoPpal[2], lista_productos, margen)
+    if productoValido: # true o false
+        return productoPpal #producto = ["Silla de oficina", "(premium)", 4391]
 
 # Busca el precio del producto_principal y el precio del producto_candidato, si son iguales o dentro
 # del margen, entonces es valido y suma a la canasta el valor del producto. No suma si eligió directamente
 #el producto
 def procesar(producto_principal, producto_candidato, margen):
-    return 0
+    precioPpal = producto_principal[2]
+    precioCandidato = producto_candidato[2]
+    
+    """ print("precioPpal: ", precioPpal)
+    print("precioCandidato: ", precioCandidato)
+    print("diferencia: ", abs(precioCandidato-precioPpal)) """
+    
+    if (abs(precioCandidato - precioPpal) <= margen):
+        return 1
+    else:
+        return 0
 
+# Sin repetidos:
+def estaEnLista (producto, lista):
+    for element in lista:
+        if (element == producto):
+            return True
+    
 #Elegimos productos aleatorios, garantizando que al menos 2 tengan el mismo precio.
 #De manera aleatoria se debera tomar el valor economico o el valor premium. Agregar al nombre '(economico)' o '(premium)'
 #para que sea mostrado en pantalla.
 def dameProductosAleatorios(producto, lista_productos, margen):
-    # producto = 3 -> smart
-    # lista_productos = 3 -> [ 3, 4, 5 ] precios similares según el margen... 
-    # smart precio economico 2500 -> margen 1000 => productos con precio economico entre 1500 - 3500 -> productos_seleccionados =[ ... ]
-    # for -> p/encontrar el producto
-    # random seleccionar premium o economico
-    # seleccionas el precio -> buscas precios similares considerando el margen
-    # returna lista productos con precios similares
+    productos_seleccionados = []
+    productos_seleccionados.append(producto)
     
-    # random = (1, 2)
-    # if 1: retorna economico
-    # if 2: retorna premium
-    
-    # for element in lista:
-    # [ "nombre", precio econom, precio premium ] => precioElegido = element[ posicion ] 
-    # if precioElegido > (precioElegido - margen) AND precioElegido < (precioElegido + margen)
-    # 2500
-    # 1000
-    # 1500 - 3500
-    # 2500 -1000 = 1500
-    # 2500 +1000 = 3500
-        # true -> productos_seleccionados.append(element)
-    
-    
-    productos_seleccionados =   [["Monitor de computadora", "(premium)", 2870],
-            ["Silla de oficina", "(economico)", 3174],
-            ["Lavadora", "(premium)", 4197],
-            ["Refrigerador", "(premium)", 4533],
-            ["Laptop", "(economico)", 4650],
-            ["Cafetera", "(economico)", 2358]]
-    return productos_seleccionados
-
-
+    for element in lista_productos:
+        productoValido = dameProducto(lista_productos, margen)
+        # verifico que no esté en la lista antes de agregarlo
+        if not estaEnLista(element[0], productos_seleccionados[0]):
+            productos_seleccionados.append(productoValido)
+        
+        if len(productos_seleccionados) == 6: # 6??
+            return productos_seleccionados
