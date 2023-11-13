@@ -47,10 +47,12 @@ def esUnPrecioValido(precio, lista_productos, margen): # precio = 2500, margen 1
 
 # Elige el producto. Debe tener al menos dos productos con un valor similar
 def dameProducto(lista_productos, margen):
-    productoPpal = buscar_producto(lista_productos) #producto = ["Silla de oficina", "(premium)", 4391]
-    productoValido = esUnPrecioValido(productoPpal[2], lista_productos, margen)
-    if productoValido: # true o false
-        return productoPpal #producto = ["Silla de oficina", "(premium)", 4391]
+    while True:
+        productoPpal = buscar_producto(lista_productos) #producto = ["Silla de oficina", "(premium)", 4391]
+        productoValido = esUnPrecioValido(productoPpal[2], lista_productos, margen)
+        if productoValido:    
+            return productoPpal # producto = ["Silla de oficina", "(premium)", 4391]
+        
 
 # Busca el precio del producto_principal y el precio del producto_candidato, si son iguales o dentro
 # del margen, entonces es valido y suma a la canasta el valor del producto. No suma si eligió directamente
@@ -58,10 +60,6 @@ def dameProducto(lista_productos, margen):
 def procesar(producto_principal, producto_candidato, margen):
     precioPpal = producto_principal[2]
     precioCandidato = producto_candidato[2]
-    
-    """ print("precioPpal: ", precioPpal)
-    print("precioCandidato: ", precioCandidato)
-    print("diferencia: ", abs(precioCandidato-precioPpal)) """
     
     if (abs(precioCandidato - precioPpal) <= margen):
         return 1
